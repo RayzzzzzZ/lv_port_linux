@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "lv_demos.h": "c",
+        "lv_st7789.h": "c",
+        "lv_demo_high_res.h": "c"
+    }
+}

@@ -1,8 +1,9 @@
 #
 # Makefile
 #
-CC 				?= gcc
-CXX				?= g++
+# ROOTDIR = /home/parallels/gcc-arm-9.2-2019.12-aarch64-arm-none-linux-gnueabihf/bin/
+CC = $(ROOTDIR)arm-none-linux-gnueabihf-gcc
+CXX = $(ROOTDIR)arm-none-linux-gnueabihf-g++
 LVGL_DIR_NAME 	?= lvgl
 LVGL_DIR 		?= .
 
@@ -11,8 +12,11 @@ WARNINGS		:= -Wall -Wshadow -Wundef -Wmissing-prototypes -Wno-discarded-qualifie
 					-Wsizeof-pointer-memaccess -Wno-format-nonliteral -Wno-cast-qual -Wunreachable-code -Wno-switch-default -Wreturn-type -Wmultichar -Wformat-security \
 					-Wno-ignored-qualifiers -Wno-error=pedantic -Wno-sign-compare -Wno-error=missing-prototypes -Wdouble-promotion -Wclobbered -Wdeprecated -Wempty-body \
 					-Wshift-negative-value -Wstack-usage=2048 -Wno-unused-value -std=gnu99
-CFLAGS 			?= -O3 -g0 -I$(LVGL_DIR)/ $(WARNINGS)
+CFLAGS 			?= -O3 -g0 -I$(LVGL_DIR)/ $(WARNINGS) 
+CFLAGS			+= -I$(LVGL_DIR)/library/include/freetype2 -L$(LVGL_DIR)/library/lib
 LDFLAGS 		?= -lm -lstdc++
+LDFLAGS			+= -L$(LVGL_DIR)/library/lib -lfreetype
+LDFLAGS			+= -lpthread
 BIN 			= main
 BUILD_DIR 		= ./build
 BUILD_OBJ_DIR 	= $(BUILD_DIR)/obj
@@ -66,10 +70,3 @@ default: $(TARGET)
 
 clean: 
 	rm -rf $(BUILD_DIR)
-
-install:
-	install -d $(DESTDIR)$(bindir)
-	install $(BUILD_BIN_DIR)/$(BIN) $(DESTDIR)$(bindir)
-
-uninstall:
-	$(RM) -r $(addprefix $(DESTDIR)$(bindir)/,$(BIN))

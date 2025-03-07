@@ -87,7 +87,7 @@
  *====================*/
 
 /** Default display refresh, input device read and animation step period. */
-#define LV_DEF_REFR_PERIOD  33      /**< [ms] */
+#define LV_DEF_REFR_PERIOD  10      /**< [ms] */
 
 /** Default Dots Per Inch. Used to initialize default sizes such as widgets sized, style paddings.
  * (Not so important, you can adjust it to modify default sizes and spaces.) */
@@ -106,7 +106,7 @@
  * - LV_OS_MQX
  * - LV_OS_SDL2
  * - LV_OS_CUSTOM */
-#define LV_USE_OS   LV_OS_NONE
+#define LV_USE_OS   LV_OS_PTHREAD
 
 #if LV_USE_OS == LV_OS_CUSTOM
     #define LV_OS_CUSTOM_INCLUDE <stdint.h>
@@ -333,7 +333,7 @@
  *-----------*/
 
 /** Enable log module */
-#define LV_USE_LOG 1
+#define LV_USE_LOG 0
 #if LV_USE_LOG
     /** Set value to one of the following levels of logging detail:
      *  - LV_LOG_LEVEL_TRACE    Log detailed information.
@@ -381,9 +381,9 @@
  * If LV_USE_LOG is enabled, an error message will be printed on failure. */
 #define LV_USE_ASSERT_NULL          1   /**< Check if the parameter is NULL. (Very fast, recommended) */
 #define LV_USE_ASSERT_MALLOC        1   /**< Checks is the memory is successfully allocated or no. (Very fast, recommended) */
-#define LV_USE_ASSERT_STYLE         1
-#define LV_USE_ASSERT_MEM_INTEGRITY 1
-#define LV_USE_ASSERT_OBJ           1
+#define LV_USE_ASSERT_STYLE         0
+#define LV_USE_ASSERT_MEM_INTEGRITY 0
+#define LV_USE_ASSERT_OBJ           0
 
 /** Add a custom handler when assert happens e.g. to restart MCU. */
 #define LV_ASSERT_HANDLER_INCLUDE <stdint.h>
@@ -632,7 +632,7 @@
 /** Support bidirectional text. Allows mixing Left-to-Right and Right-to-Left text.
  *  The direction will be processed according to the Unicode Bidirectional Algorithm:
  *  https://www.w3.org/International/articles/inline-bidi-markup/uba-basics */
-#define LV_USE_BIDI 0
+#define LV_USE_BIDI 1
 #if LV_USE_BIDI
     /*Set the default direction. Supported values:
     *`LV_BASE_DIR_LTR` Left-to-Right
@@ -643,7 +643,7 @@
 
 /** Enable Arabic/Persian processing
  *  In these languages characters should be replaced with another form based on their position in the text */
-#define LV_USE_ARABIC_PERSIAN_CHARS 0
+#define LV_USE_ARABIC_PERSIAN_CHARS 1
 
 /*The control character to use for signaling text recoloring*/
 #define LV_TXT_COLOR_CMD "#"
@@ -899,7 +899,7 @@
 #define LV_USE_BARCODE 1
 
 /** FreeType library */
-#define LV_USE_FREETYPE 0
+#define LV_USE_FREETYPE 1
 #if LV_USE_FREETYPE
     /** Let FreeType use LVGL memory and file porting */
     #define LV_FREETYPE_USE_LVGL_PORT 0
@@ -963,14 +963,14 @@
 #define LV_USE_SNAPSHOT 0
 
 /** 1: Enable system monitor component */
-#define LV_USE_SYSMON   0
+#define LV_USE_SYSMON   1
 #if LV_USE_SYSMON
     /** Get the idle percentage. E.g. uint32_t my_get_idle(void); */
     #define LV_SYSMON_GET_IDLE lv_timer_get_idle
 
     /** 1: Show CPU usage and FPS count.
      *  - Requires `LV_USE_SYSMON = 1` */
-    #define LV_USE_PERF_MONITOR 0
+    #define LV_USE_PERF_MONITOR 1
     #if LV_USE_PERF_MONITOR
         #define LV_USE_PERF_MONITOR_POS LV_ALIGN_BOTTOM_RIGHT
 
@@ -1092,7 +1092,7 @@
 
 /** 1: Enable freetype font manager
  *  - Requires: LV_USE_FREETYPE */
-#define LV_USE_FONT_MANAGER                     0
+#define LV_USE_FONT_MANAGER                     1
 #if LV_USE_FONT_MANAGER
 
 /**Font manager name max length*/
@@ -1293,19 +1293,19 @@
 #define LV_USE_DEMO_SCROLL          1
 
 /** Vector graphic demo */
-#define LV_USE_DEMO_VECTOR_GRAPHIC  0
+#define LV_USE_DEMO_VECTOR_GRAPHIC  1
 
 /*E-bike demo with Lottie animations (if LV_USE_LOTTIE is enabled)*/
-#define LV_USE_DEMO_EBIKE			0
+#define LV_USE_DEMO_EBIKE			1
 #if LV_USE_DEMO_EBIKE
-	#define LV_DEMO_EBIKE_PORTRAIT  0    /*0: for 480x270..480x320, 1: for 480x800..720x1280*/
+	#define LV_DEMO_EBIKE_PORTRAIT  1    /*0: for 480x270..480x320, 1: for 480x800..720x1280*/
 #endif
 
 /** High-resolution demo */
 #define LV_USE_DEMO_HIGH_RES        1
 
 /* Smart watch demo */
-#define LV_USE_DEMO_SMARTWATCH      0
+#define LV_USE_DEMO_SMARTWATCH      1
 
 /*--END OF LV_CONF_H--*/
 

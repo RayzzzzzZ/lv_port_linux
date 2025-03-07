@@ -192,9 +192,14 @@ int main(int argc, char **argv)
     lv_linux_disp_init();
 
     /*Create a Demo*/
-    lv_demo_widgets();
-    lv_demo_widgets_start_slideshow();
-
+    //lv_demo_widgets();
+    //lv_demo_widgets_start_slideshow();
+    lv_demo_benchmark();
+    //lv_demo_vector_graphic_buffered();
+    //lv_demo_smartwatch();
+    //lv_demo_ebike();
+    //lv_demo_multilang();
+    
     lv_linux_run_loop();
 
     return 0;
