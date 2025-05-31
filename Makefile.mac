@@ -1,9 +1,8 @@
 #
 # Makefile
 #
-CROSS_COMPILE ?= arm-none-linux-gnueabihf-
-CC = $(CROSS_COMPILE)gcc
-CXX = $(CROSS_COMPILE)g++
+CC = gcc
+CXX = g++
 LVGL_DIR_NAME 	?= lvgl
 LVGL_DIR 		?= .
 
@@ -11,17 +10,14 @@ WARNINGS		:= -Wall -Wshadow -Wundef -Wmissing-prototypes -Wno-discarded-qualifie
 					-fno-strict-aliasing -Wno-error=cpp -Wuninitialized -Wmaybe-uninitialized -Wno-unused-parameter -Wno-missing-field-initializers -Wtype-limits \
 					-Wsizeof-pointer-memaccess -Wno-format-nonliteral -Wno-cast-qual -Wunreachable-code -Wno-switch-default -Wreturn-type -Wmultichar -Wformat-security \
 					-Wno-ignored-qualifiers -Wno-error=pedantic -Wno-sign-compare -Wno-error=missing-prototypes -Wdouble-promotion -Wclobbered -Wdeprecated -Wempty-body \
-					-Wshift-negative-value -Wstack-usage=2048 -Wno-unused-value -std=gnu99
-CFLAGS 			?= -O3 -g0 -I$(LVGL_DIR)/ $(WARNINGS) 
-CFLAGS 			+= -ffunction-sections -fdata-sections
-CFLAGS			+= -I$(LVGL_DIR)/library/include
-CFLAGS			+= -I$(LVGL_DIR)/library/include/libdrm
-CFLAGS			+= -I$(LVGL_DIR)/library/include/freetype2 
-CFLAGS			+= -L$(LVGL_DIR)/library/lib
+					-Wshift-negative-value -Wno-unused-value
+CFLAGS 			?= -O3 -g0 -I$(LVGL_DIR)/ $(WARNINGS) -std=gnu99
+CFLAGS			+= -I/opt/homebrew/opt/sdl2/include
+CXXFLAGS		?= -O3 -g0 -I$(LVGL_DIR)/ $(WARNINGS) -std=c++17
+CXXFLAGS		+= -I/opt/homebrew/opt/sdl2/include
 LDFLAGS 		?= -lm -lstdc++
-LDFLAGS			+= -lpthread 
-LDFLAGS			+= -L$(LVGL_DIR)/library/lib -ldrm
-LDFLAGS 		+= -Wl,--gc-sections -Wl,--print-gc-sections -Wl,-s
+LDFLAGS			+= -L/opt/homebrew/lib
+LDFLAGS			+= -lSDL2
 BIN 			= main
 BUILD_DIR 		= ./build
 BUILD_OBJ_DIR 	= $(BUILD_DIR)/obj
@@ -66,8 +62,9 @@ $(BUILD_OBJ_DIR)/%.o: %.S lv_conf.h
 
 $(BUILD_OBJ_DIR)/%.o: %.cpp lv_conf.h
 	@mkdir -p $(dir $@)
-	@$(CXX)  $(CFLAGS) -c $< -o $@
+	@$(CXX)  $(CXXFLAGS) -c $< -o $@
 	@echo "CXX $<"
+
 
 default: $(TARGET)
 	@mkdir -p $(dir $(BUILD_BIN_DIR)/)

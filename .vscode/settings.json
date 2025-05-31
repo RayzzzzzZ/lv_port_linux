@@ -2,6 +2,17 @@
     "files.associations": {
         "lv_demos.h": "c",
         "lv_st7789.h": "c",
-        "lv_demo_high_res.h": "c"
-    }
+        "lv_demo_high_res.h": "c",
+        "lv_x11.h": "c",
+        "lv_version.h": "c",
+        "lv_evdev_private.h": "c",
+        "param.h": "c"
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/Users/ray/Downloads/lv_port_linux/build/bin",
+            "binaryPath": "/Users/ray/Downloads/lv_port_linux/build/bin/main",
+            "binaryArgs": []
+        }
+    ]
 }

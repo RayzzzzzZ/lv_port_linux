@@ -62,7 +62,7 @@ static void lv_linux_init_input_pointer(lv_display_t *disp)
      * 
      * If LV_LINUX_EVDEV_POINTER_DEVICE is not set, automatic evdev disovery will start
      */
-    const char *input_device = getenv("LV_LINUX_EVDEV_POINTER_DEVICE");
+    const char *input_device = "/dev/input/event0";//getenv("LV_LINUX_EVDEV_POINTER_DEVICE");
 
     if (input_device == NULL) {
         LV_LOG_USER("the LV_LINUX_EVDEV_POINTER_DEVICE environment variable is not set. using evdev automatic discovery.");
@@ -109,8 +109,29 @@ static void lv_linux_disp_init(void)
 static void lv_linux_disp_init(void)
 {
 
-    lv_sdl_window_create(window_width, window_height);
+    //lv_sdl_window_create(window_width, window_height);
+    lv_group_set_default(lv_group_create());
 
+    lv_display_t * disp = lv_sdl_window_create(480, 800);
+  
+    lv_indev_t * mouse = lv_sdl_mouse_create();
+    lv_indev_set_group(mouse, lv_group_get_default());
+    lv_indev_set_display(mouse, disp);
+    lv_display_set_default(disp);
+  
+    LV_IMAGE_DECLARE(mouse_cursor_icon); /*Declare the image file.*/
+    lv_obj_t * cursor_obj;
+    cursor_obj = lv_image_create(lv_screen_active()); /*Create an image object for the cursor */
+    lv_image_set_src(cursor_obj, &mouse_cursor_icon);           /*Set the image source*/
+    lv_indev_set_cursor(mouse, cursor_obj);             /*Connect the image  object to the driver*/
+  
+    lv_indev_t * mousewheel = lv_sdl_mousewheel_create();
+    lv_indev_set_display(mousewheel, disp);
+    lv_indev_set_group(mousewheel, lv_group_get_default());
+  
+    lv_indev_t * kb = lv_sdl_keyboard_create();
+    lv_indev_set_display(kb, disp);
+    lv_indev_set_group(kb, lv_group_get_default());
 }
 #elif LV_USE_WAYLAND
     /* see backend/wayland.c */
@@ -192,14 +213,14 @@ int main(int argc, char **argv)
     lv_linux_disp_init();
 
     /*Create a Demo*/
-    //lv_demo_widgets();
+    lv_demo_widgets();
     //lv_demo_widgets_start_slideshow();
-    lv_demo_benchmark();
+    //lv_demo_benchmark();
     //lv_demo_vector_graphic_buffered();
     //lv_demo_smartwatch();
     //lv_demo_ebike();
     //lv_demo_multilang();
-    
+
     lv_linux_run_loop();
 
     return 0;

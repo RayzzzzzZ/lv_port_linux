@@ -1,0 +1,6 @@
+Name: rlottie
+Description: A rlottie library
+Version: 0.2
+Requires:
+Libs: -L/home/parallels/rlottie/build/out/lib -lrlottie
+Cflags: -I/home/parallels/rlottie/build/out/include
