@@ -6,7 +6,8 @@
         "lv_x11.h": "c",
         "lv_version.h": "c",
         "lv_evdev_private.h": "c",
-        "param.h": "c"
+        "param.h": "c",
+        "touch_test_board.h": "c"
     },
     "makefile.launchConfigurations": [
         {

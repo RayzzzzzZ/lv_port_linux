@@ -36,6 +36,7 @@ MAINSRC          = ./main.c
 include $(LVGL_DIR)/lvgl/lvgl.mk
 
 CSRCS 			+=$(LVGL_DIR)/mouse_cursor_icon.c 
+CSRCS			+=$(LVGL_DIR)/touch_test_board.c 
 
 OBJEXT 			?= .o
 

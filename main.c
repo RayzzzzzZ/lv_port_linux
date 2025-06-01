@@ -12,6 +12,8 @@
 #include "backends/interface.h"
 #endif
 
+#include "touch_test_board.h"
+
 uint16_t window_width;
 uint16_t window_height;
 bool fullscreen;
@@ -74,10 +76,10 @@ static void lv_linux_init_input_pointer(lv_display_t *disp)
     lv_indev_set_display(touch, disp);
 
     /* Set the cursor icon */
-    LV_IMAGE_DECLARE(mouse_cursor_icon);
-    lv_obj_t * cursor_obj = lv_image_create(lv_display_get_screen_active(disp));
-    lv_image_set_src(cursor_obj, &mouse_cursor_icon);
-    lv_indev_set_cursor(touch, cursor_obj);
+//    LV_IMAGE_DECLARE(mouse_cursor_icon);
+//    lv_obj_t * cursor_obj = lv_image_create(lv_display_get_screen_active(disp));
+//    lv_image_set_src(cursor_obj, &mouse_cursor_icon);
+//    lv_indev_set_cursor(touch, cursor_obj);
 }
 #endif
 
@@ -121,7 +123,7 @@ static void lv_linux_disp_init(void)
   
     LV_IMAGE_DECLARE(mouse_cursor_icon); /*Declare the image file.*/
     lv_obj_t * cursor_obj;
-    cursor_obj = lv_image_create(lv_screen_active()); /*Create an image object for the cursor */
+    cursor_obj = lv_image_create(lv_scr_act()); /*Create an image object for the cursor */
     lv_image_set_src(cursor_obj, &mouse_cursor_icon);           /*Set the image source*/
     lv_indev_set_cursor(mouse, cursor_obj);             /*Connect the image  object to the driver*/
   
@@ -221,6 +223,8 @@ int main(int argc, char **argv)
     //lv_demo_ebike();
     //lv_demo_multilang();
 
+    //touch_test_board_start();
+    
     lv_linux_run_loop();
 
     return 0;
